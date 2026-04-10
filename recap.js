@@ -108,3 +108,114 @@ for (let i = 0; i < moreColors.length; i++) {
   // i vale: 0, 1, 2, 3, 4
   // moreColors[i] vale: 'tangerine', 'blue', 'indigo', 'limegreen', 'pink'
 }
+
+// oggi gli array arrivano con dei metodi INTEGRATI per le loro iterazioni/esplorazioni
+// forEach, map, filter, reduce
+
+// forEach è un ciclo for integrato in ogni array: serve per eseguire un'operazione tot volte, avendo
+// a disposizione un elemento dell'array alla volta
+moreColors.forEach((color, i) => {
+  // le operazioni che farò qui dentro verranno ripetute 5 volte
+  console.log('CIAO') // 5 volte "CIAO"
+  console.log(color) // uno degli elementi dell'array: alla prima iterazione è 'tangerine', alla seconda 'blue' etc.
+  // color è come dire moreColors[i] in un ciclo for
+  // moreColors[i] è la stessa identica cosa di fare color
+  // i è sempre 0, 1, 2, 3, 4
+})
+
+const x = moreColors.map((color, i) => {
+  // map è un metodo che serve a TRASFORMARE un array iniziale in un NUOVO ARRAY (senza rovinare l'originale)
+  return color.toUpperCase()
+})
+
+// x è ora un array di 5 colori, ma ogni colore è MAIUSCOLO
+// ['TANGERINE', 'BLUE', 'INDIGO', 'LIMEGREEN', 'PINK']
+
+const names = ['stefano', 'robespierre', 'giangiorgio', 'giuletta', 'romeo']
+
+// ora da questo array names voglio creare un array di OGGETTI, in cui in ogni oggetto
+// avrò il nome della persona e il suo numero preferito
+
+const characters = names.map((nome) => {
+  return {
+    name: nome,
+    favouriteNumber: Math.ceil(Math.random() * 10), // un numero da 1 a 10
+  }
+})
+// [
+//   // characters è un array di oggetti, tipo:
+//   {
+//     name: 'stefano',
+//     favouriteNumber: 5,
+//   },
+//   {
+//     name: 'robespierre',
+//     favouriteNumber: 9,
+//   },
+//   {
+//     name: 'giangiorgio',
+//     favouriteNumber: 7,
+//   },
+//   {
+//     name: 'giuletta',
+//     favouriteNumber: 1,
+//   },
+//   {
+//     name: 'romeo',
+//     favouriteNumber: 2,
+//   }
+// ]
+
+// il metodo filter invece permette di restituire un nuovo array in cui gli elementi NON sono modificati,
+// ma in cui possiamo avere MENO elementi dell'originale
+
+const namesConLaG = names.filter((nome) => {
+  return nome.charAt(0) === 'g'
+})
+
+// namesConLaG ora è -> ['giangiorgio', 'giulietta'] perchè erano gli unici elementi in cui il primo carattere era "g"
+
+const charactersConLaG = characters.filter((character) => {
+  return character.name.charAt(0) === 'g'
+})
+
+// charactersConLaG ora è -> [{name: 'giangiorgio', favouriteNumber: 7}, {name: 'giuletta', favouriteNumber: 1}]
+
+// reduce è un metodo degli array per ridurre un array ad un singolo valore
+// creiamo una stringa orribile con tutti i nomi dei personaggi: "stefanorobespierregiangiorgiogiulettaromeo"
+
+const stringaOrribile = characters.reduce((acc, element) => {
+  // acc è il valore che porteremo avanti ad ogni iterazione
+  // element è l'elemento corrente, l'oggetto
+  return acc + element.name
+}, '')
+
+// cronostoria di acc:
+// all'inizio è ''
+// poi è '' + 'stefano' -> 'stefano'
+// poi è 'stefano' + 'robespierre' -> 'stefanorobespierre'
+// poi è 'stefanorobespierre' + 'giangiorgio' -> 'stefanorobespierregiangiorgio'
+// ecc.
+
+// FUNZIONI
+// una funzione è un blocco di codice, dotato di nome, invocabile quante volte si desidera.
+// le funzioni in JS si possono definire in diversi modi, i più moderni sono:
+// a) scrivere una funzione anonima e assegnarla ad una costante
+const presentati = function () {
+  console.log('CIAO, sono una funzione')
+}
+
+// b) scrivere la funzione con lo stile "arrow function"
+const daiLaMano = () => {
+  console.log('mi presento, mi chiamo Stefano')
+}
+
+// una funzione freccia non possiede un significato interno per parole chiave come "this" e "super"
+// per il resto sono sostanzialmente metodi analoghi
+
+// una funzione PRIMA si dichiara, e POI si INVOCA (si lancia)
+presentati() // <-- invocazione di funzione, ora la sto ESEGUENDO
+daiLaMano() // <-- invocazione di funzione, ora la sto ESEGUENDO
+
+// però ogni tanto le funzioni trovano delle limitazioni nel codice che si trovano ad eseguire, più che altro
+// perchè questo codice non può subire variazioni
